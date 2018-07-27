@@ -6,29 +6,36 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class ListTest {
+	
+	public int indexOf(String[]strList, String s) {
+		ArrayList<String> strList  = new ArrayList<String>();
+	
+		strList.add("정국이");
+		strList.add("보거미");
+		strList.add("은우");
+		
+		int idx4 = strList.indexOf("보거미");
+	
+		return 0;
+	}
 
 	public static void main(String[] args) {
-		/*ArrayList strList1  = new ArrayList<String>();
-		//오브젝트로 포이치문 가능
-		strList1.add(1);
-		strList1.add(1.1);
-		strList1.add(true);
-		strList1.add(new String[2]);
-		*/
-		String str = "12345";
-		int idx = str.indexOf("6");//2라는 글자의 인덱스가뭐양? 그러면 주의 영부터 방번호시작되므로 3!!
-		System.out.println(idx);//-1은 나올수 없는 값이므로 -1출력!!!!
-		int idx1 = str.indexOf("345");//이글자가 시작되는 위치이므로 3 은 2~
+		
+		
+		System.out.println();
+		
+		
+		
 		
 		
 		
 		ArrayList<String> strList  = new ArrayList<String>();
-		System.out.println(strList.size());
+		//System.out.println(strList.size());
 		strList.add("정국이");
 		strList.add("보거미");
 		strList.add("은우");
-		strList.remove("은우");
-		System.out.println(strList.size());//배열의 길이가 유동적임!
+		//strList.remove("은우");
+		//System.out.println(strList.size());//배열의 길이가 유동적임!
 		int idx4 = strList.indexOf("보거미");
 		System.out.println(idx4);
 		
@@ -60,6 +67,23 @@ public class ListTest {
 		 //인터페이스라 뉴랑 셋이 안됨<List<String> al = new List<String>();>
 		 
 		 al = new LinkedList<String>();//모두다 인터페이스 리스트구현 받아서 가능
-*/	}
+*/
+		
+	
+		/*ArrayList strList1  = new ArrayList<String>();
+		//오브젝트로 포이치문 가능
+		strList1.add(1);
+		strList1.add(1.1);
+		strList1.add(true);
+		strList1.add(new String[2]);
+		*/
+		/*String str = "12345";
+		int idx = str.indexOf("6");//2라는 글자의 인덱스가뭐양? 그러면 주의 영부터 방번호시작되므로 3!!
+		System.out.println(idx);//-1은 나올수 없는 값이므로 -1출력!!!!
+		int idx1 = str.indexOf("345");//이글자가 시작되는 위치이므로 3 은 2~
+		*/
+		
+	
+	}
 
 }

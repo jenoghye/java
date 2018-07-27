@@ -19,16 +19,21 @@ public class UserDAOImpl implements test.UserDAO {
 
 	@Override
 	public int insertUserInfo(HashMap<String, String> userInfo) {
-		String sql = "insert into User_info(uiName, uiAge, uiCredat, uiCretim, uiEtc, uiDelete, uiEtc)"
-				+ "values(?,?,date_format(now(),%Y%m%d),date_format(now(),%H%i%s),?,?,'0')";
+		String sql = "insert into member(memNum, memName, memId, memPwd, memAge, memEtc, "
+				+ "credat, cretim, moddat, modtim)"
+				+ " values(mem_seq.nextval,?,?,?,?,?, to_char(sysdate, 'YYYYmmdd'),to_char(sysdate, 'HH24miss'),to_char(sysdate, 'YYYYmmdd'), to_char(sysdate, 'HH24miss'))";
 
 		try {
 			PreparedStatement ps = this.con.prepareStatement(sql);
-			ps.setString(1, userInfo.get("uiName"));
-			ps.setString(2, "uiName");
-			ps.setString(3, userInfo.get("uiCredat"));
+			
+			ps.setString(1, userInfo.get("memName"));
+			ps.setString(2, userInfo.get("memId"));
+			ps.setString(3, userInfo.get("memPwd"));
+			ps.setString(4, userInfo.get("memAge"));
+			ps.setString(5, userInfo.get("memEtc"));
 
-			ResultSet rs = ps.executeQuery();
+
+			result =ps.executeUpdate();
 			this.con.commit();
 		} catch (SQLException e) {
 			try{
@@ -43,17 +48,17 @@ public class UserDAOImpl implements test.UserDAO {
 
 	@Override
 	public int deleteUserInfo(HashMap<String, String> userInfo) {
-       String sql = "delete from user_info";
+       String sql = "delete from member";
        if(userInfo!=null) {
-    	   if(userInfo.get("uiName")!=null) {
-    		   sql += " where uiName=?";
+    	   if(userInfo.get("memNum")!=null) {
+    		   sql += " where memNum=?";
     	   }
        }
        try {
     	   PreparedStatement ps = this.con.prepareStatement(sql);
     	   if(userInfo!= null) {
-    		   if(userInfo.get("uiName")!=null) {
-    			   ps.setString(1,userInfo.get("uiName"));
+    		   if(userInfo.get("memNum")!=null) {
+    			   ps.setString(1,userInfo.get("memNum"));
     		   }
     	   }
     	   
@@ -73,18 +78,18 @@ public class UserDAOImpl implements test.UserDAO {
 
 	@Override
 	public int updateUserInfo(HashMap<String, String> userInfo) {
-		String sql =  "update user_info";
+		String sql =  "update member";
 		if(userInfo != null) {
-			if(userInfo.get("uiName")!= null) {
-				sql+= "set uiEtc=? where uiName=?";
+			if(userInfo.get("memNum")!= null) {
+				sql+= " set memEtc=? where memNum=?";
 			}
 		}
 		try {
 			PreparedStatement ps = this.con.prepareStatement(sql);
 			if(userInfo != null) {
-				if(userInfo.get("uiName")!=null) {
-					ps.setString(1, userInfo.get("uiEtc"));
-					ps.setString(2, "uiName");
+				if(userInfo.get("memNum")!=null) {
+					ps.setString(1, userInfo.get("memEtc"));
+					ps.setString(2, userInfo.get("memNum"));
 					
 				}
 				
@@ -107,7 +112,7 @@ public class UserDAOImpl implements test.UserDAO {
 	@Override
 	public ArrayList<HashMap<String, String>> selectUserInfoList() {
 		ArrayList<HashMap<String, String>> userList = new ArrayList<HashMap<String, String>>();
-		String sql = "select * from user_info";
+		String sql = "select * from member";
 
 		try {
 			PreparedStatement ps = this.con.prepareStatement(sql);
@@ -115,13 +120,16 @@ public class UserDAOImpl implements test.UserDAO {
 
 			while (rs.next()) {
 				HashMap<String, String> user = new HashMap<String, String>();
-				user.put("uiNum", rs.getString("uiNum"));
-				user.put("uiName", rs.getString("uiName"));
-				user.put("uiAge", rs.getString("uiAge"));
-				user.put("uiCredat", rs.getString("uiCredat"));
-				user.put("uiCretim", rs.getString("uiCretim"));
-				user.put("uiDelete", rs.getString("uiDelete"));
-				user.put("uiEtc", rs.getString("uiEtc"));
+				user.put("memNum", rs.getString("memNum"));
+				user.put("memName", rs.getString("memName"));
+				user.put("memId", rs.getString("memId"));
+				user.put("memPwd", rs.getString("memPwd"));
+				user.put("memAge", rs.getString("memAge"));
+				user.put("memEtc", rs.getString("memEtc"));
+				/*user.put("memCredat", rs.getString("memCredat"));
+				user.put("memCretim", rs.getString("memCretim"));
+				user.put("memDelete", rs.getString("memDelete"));*/
+				user.put("memEtc", rs.getString("memEtc"));
 				userList.add(user);
 			}
 		} catch (SQLException e) {

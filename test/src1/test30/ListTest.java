@@ -16,6 +16,6 @@ public class ListTest {
 		
 		Cat c1 = new Cat();
 		c1.setName("샴");
-		Cat 
+		
 	}
 }
